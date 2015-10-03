@@ -1,7 +1,9 @@
 
 from itertools import combinations, chain
 
-from parameters import n
+
+from parameters import parameters
+n = parameters['n']
 
 def Initial_Strategy(n):							#e.g. [1, 2, 4, -7]
     initial_strategy = [2**i for i in range(n - 1)]

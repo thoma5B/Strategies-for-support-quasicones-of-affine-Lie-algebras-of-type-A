@@ -1,6 +1,7 @@
 
 from collections import deque
-import parameters import n
+from parameters import parameters
+n = parameters['n']
 
 def Defect(C):
     defect = 0
@@ -109,7 +110,7 @@ class Apply_strategy():
             return
         # dont print if the entire Cartan acts trivially or the operation yields
         # a complete cone
-        # or reduction to lower-dimensional case 
+        # or reduction to lower-dimensional case
         self.balance = self.Balance_of_quasicones()
         if self.delta == -1 and self.balance > 0:
             self.successful = True

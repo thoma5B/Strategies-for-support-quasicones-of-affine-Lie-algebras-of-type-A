@@ -1,7 +1,8 @@
 import numpy as p
 
 from Iterator import subdiag
-from parameters import n
+from parameters import parameters
+n = parameters['n']
 
 def transposition_labeled_sort(L, key = lambda x: x, reverse=False):
 	# sorting algorithm that remembers sign of transposition

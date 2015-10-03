@@ -1,6 +1,7 @@
 from collections import deque
 
-from parameters import n
+from parameters import parameters
+n = parameters['n']
 
 Iterate_Nondiag = iter([(i,j) for i in range(n) for j in range(n) if i != j])
 subdiag = [(j + offdiag, j) for offdiag in range(1, n) for j in range(n - offdiag)]
