@@ -1,23 +1,22 @@
 from collections import defaultdict
 import numpy as p
 import Quasicone
+from Quasicone.Apply_strategy import Apply_strategy
+import json, pickle
 
-from Quasicone.parameters import n
+with open("parameters.json", "rw+") as f:
+    parameters = json.load(f)
+startweight = parameters['startweight']
+inputfile = parameters['exceptionals']
+outputfile = 'unsolved_after_TreeMap.pi'
+n = parameters['n']
 
-#from optparse import OptionParser
-#parser = OptionParser()
-#parser.add_option("-r", "--rank", dest="rank")
-#parser.add_option("-i", "--input", dest="input")
-#parser.add_option("-o", "--output", dest="output")
-#(options, args) = parser.parse_args()
-#r = int(options.rank)
-#inputfile = options.input
-#outputfile = options.output
-
-
-inputfile = "list_of_extraexceptionals_r4ov"
-#outputfile = "tree_for_graph_r4"
-outputfile = "list_of_specialexceptionals_r4"
+import pickle
+if inputfile:
+    file = open(inputfile, "r")
+    list_of_exceptionals = pickle.load(file)
+    file.close()
+else: print "no inputfile indicated; use option -i [filename]"
 
 
 # File Operations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -231,13 +230,9 @@ T = MapTree(list_of_exceptionals)
 T.run()
 #To_File(T.Tree)
 #Output_as_Graph(Tree_to_TeX(T.Tree))
-
 #print "len(MapTree.list_of_successful): ",  len(MapTree.list_of_successful)
-
 #print(T)
 
-
-#exit()
 
 count = 0
 list_of_unsolved = []
@@ -262,5 +257,6 @@ list_of_unsolved_array = [p.array(C_init) for C_init in list_of_unsolved]
 To_File(list_of_unsolved_array)
 
 #as TeX-formatted output
-#import TeX
-#print(TeX.Output(TeX.Quasicones_to_TeX(list_of_unsolved_array)))
+import TeX
+filename = 'unsolved_after_TreeMap.tex'
+TeX.to_file(TeX.Quasicones_to_TeX(list_of_unsolved_array)), filename)

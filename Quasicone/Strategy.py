@@ -53,9 +53,9 @@ def iterator(n): 							# with this, 'strategy' is a deque
     if n == 2:
         yield [1, -1]
         return
-    for x in Strategy_Iterator(n - 1):
+    for x in iterator(n - 1):
         yield x
-    initial_strategy = Initial_Strategy(n)[:(n - 1)]
+    initial_strategy = initial(n)[:(n - 1)]
     for rest in Partition_of_Operators(n):
         strategy = list(initial_strategy)
         for x in rest: strategy.append(-x)

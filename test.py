@@ -4,6 +4,8 @@ import Quasicone
 from optparse import OptionParser
 import sys
 
+from utils import timer
+
 parser = OptionParser()
 parser.add_option("-r", "--rank", dest="rank")
 parser.add_option("-i", "--input", dest="input")
@@ -17,9 +19,18 @@ except TypeError, err:
     )
 
 kwargs = {  'n' : r + 1,
-            'max' : 3 }
+            'max' : 3,
+            "extraexceptionals": "extraexceptionals_r{}.pi".format(r),
+            "exceptionals": "exceptionals_r{}.pi".format(r) }
 
 Quasicone.__init__(**kwargs)
 print 'running algorithm for n =', kwargs['n'],\
         'and max =', kwargs['max']
-import list_of_exceptionals # executes script 'list_of_exceptionals.py'
+
+@timer
+def run():
+    #import list_of_exceptionals # executes script 'list_of_exceptionals.py'
+    import list_of_extraexceptionals # executes script 'list_of_extraexceptionals.py'
+    return
+
+run()

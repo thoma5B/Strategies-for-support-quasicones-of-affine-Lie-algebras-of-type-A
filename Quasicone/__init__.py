@@ -12,7 +12,6 @@ def __init__(**kwargs):
         except ValueError,err:
             parameters = {}
             print "Warning: in file parameters.json: ", err ,'\n', f.read()
-        print parameters
         # clear file content
         f.seek(0)
         f.truncate()

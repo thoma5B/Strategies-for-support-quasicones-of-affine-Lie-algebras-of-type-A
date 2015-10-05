@@ -2,25 +2,6 @@ import math as m
 from numpy import *
 #import copy as c
 from collections import deque, defaultdict
-import pickle
-
-def to_file(data, outputfile):
-    if outputfile:
-        file = open(outputfile, "w")
-        pickle.dump(data, file)
-        file.close()
-    else: print"no outputfile indicated; use option -o [filename]"
-    return
-
-#def from_file(data, outputfile):
-#   if inputfile:
-#       file = open(inputfile, "r")
-#       list_of_exceptionals = pickle.load(file)
-#       file.close()
-#    else: print"no inputfile indicated; use option -i [filename]"
-#    return
-
-
 
 def rootsum(i, j):
     return sum((2**k) for k in range(i, j))

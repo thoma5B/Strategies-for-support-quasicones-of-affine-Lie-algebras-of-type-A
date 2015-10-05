@@ -13,7 +13,7 @@ startweight = parameters['startweight']
 
 def Defect(C):
     defect = 0
-    for [i, j] in iter(subdiag): 					# iterate through all subdiag el.
+    for [i, j] in subdiag: 					# iterate through all subdiag el.
         gap = C[i, j] + C[j, i]
         if gap > 2: defect += gap - 2
         elif gap < 0:       						# only a subalgebra A_n'^(1) acts

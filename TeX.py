@@ -14,11 +14,20 @@ def Output(data_string = ""):
 #    output_string += "\n total number of considered quasicones: "\
 #                    + str(cones_counter)
 
+def to_file(data_string, filename):
+    try:
+        with open( filename, "w") as f:
+            f.truncate()
+            f.write(Output(data_string))
+            f.close()
+    except IOError:
+        import os
+
 
 def Matrix_to_Latex_string(Matrix, n = 0):
     #if n == 0: n = len(Matrix)
     local_string = " $\left(\\begin{array}{"
-    for i in range (0, n ): 
+    for i in range (0, n ):
         local_string += "c"
     local_string += "} \n"
     #print(Matrix)
@@ -31,7 +40,7 @@ def Matrix_to_Latex_string(Matrix, n = 0):
     return local_string
 
 
-def Transform_to_Latex_string(root):  
+def Transform_to_Latex_string(root):
     return " $\overset{e_{\\alpha_{" \
                     + str(root[0]) + "} + (" \
                     + str(root[1]) + ")\\cdot\\delta" \
@@ -42,7 +51,7 @@ def Strategy_to_TeX(in_list_of_Quasicones):
     data_string = ""
     for C in in_list_of_Quasicones:
         data_string += str(C.enumerator)
-        n = len(C._C) 
+        n = len(C._C)
         data_string += Matrix_to_Latex_string(C._C, n)
         while C.Operator_sequence:
             #print(C.Operator_sequence.pop(0))
@@ -59,6 +68,6 @@ def Strategy_to_TeX(in_list_of_Quasicones):
 def Quasicones_to_TeX(list_of_Quasicones):
     data_string = ""
     for C in list_of_Quasicones:
-        n = len(C) 
-        data_string += Matrix_to_Latex_string(C, n)
+        n = len(C._C)
+        data_string += Matrix_to_Latex_string(C._C, n)
     return data_string
