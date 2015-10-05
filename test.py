@@ -11,17 +11,15 @@ parser.add_option("-o", "--output", dest="output")
 (options, args) = parser.parse_args()
 try:
     r = int(options.rank)
-    inputfile = options.input
-    outputfile = options.output
 except TypeError, err:
     raise parser.error('options are \n \
-    "-r", "--rank", dest="rank"\n \
-    "-i", "--input", dest="input"\n \
-    "-o", "--output", dest="output")'
+    "-r", "--rank", dest="rank"'
     )
 
-kwargs = { 'n' : r + 1, 'max' : 4, 'startweight' : [0, -1]}
+kwargs = {  'n' : r + 1,
+            'max' : 3 }
 
 Quasicone.__init__(**kwargs)
-print Quasicone.parameters['n']
-print Quasicone.Iterator.subdiag
+print 'running algorithm for n =', kwargs['n'],\
+        'and max =', kwargs['max']
+import list_of_exceptionals # executes script 'list_of_exceptionals.py'

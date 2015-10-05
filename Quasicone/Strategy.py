@@ -1,11 +1,14 @@
 
 from itertools import combinations, chain
+import json
+from utils import rootsum
 
-
-from parameters import parameters
+with open("parameters.json", "rw+") as f:
+    parameters = json.load(f)
 n = parameters['n']
 
-def Initial_Strategy(n):							#e.g. [1, 2, 4, -7]
+def initial(n=n):
+    """ e.g. [1, 2, 4, -7] """
     initial_strategy = [2**i for i in range(n - 1)]
     initial_strategy.append(-rootsum(0, n - 1))
     return initial_strategy
@@ -46,7 +49,7 @@ def Partition_of_Operators(n):
         yield ret_list
 
 
-def Iterator(n): 							# with this, 'strategy' is a deque
+def iterator(n): 							# with this, 'strategy' is a deque
     if n == 2:
         yield [1, -1]
         return

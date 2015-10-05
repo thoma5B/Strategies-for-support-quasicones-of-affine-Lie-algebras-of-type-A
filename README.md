@@ -23,6 +23,6 @@ Quasicone.Apply_strategy
 5. Quasicones still not solved are returned in form of a file (pickled) called 'list_of_extraexceptionals'.
 6. The left-over cases can be solved by try and error with the help of 'Interactive_RootSteps.py' and your own intuition.
 
-- The pickled list of yet unsolved quasicones can be returned in shape of a human readable TeX-file.
-- also the stepwise solution is represented, when opting-in the TeX-output in file ??
+- The pickled list of yet unsolved quasicones is printed in shape of a human readable TeX-file. Declare the output file or use the pattern from the run.sh script
+- also the stepwise solution is represented, when opting-in the TeX-output in the files list_of_*.py
 - For the MapTree-algorithm an illustration of the search tree can be produced, by means of the 'Tree_to_TikZ_Graph.py' script

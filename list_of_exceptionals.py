@@ -1,41 +1,37 @@
+"""
+computes the image of applying the initial strategy to each of
+all quasicones and saves it in the file 'list_of_exceptionals'
+"""
+
 import math as m
 import pylab as p
 import copy as c
-from Quasicone.parameters import n, max, startweight
-
 import Quasicone
+from Quasicone.Apply_strategy import Apply_strategy
+import json
 
+with open("parameters.json", "rw+") as f:
+    parameters = json.load(f)
 
-import pickle
-
-#if inputfile:
-#    file = open(inputfile, "r")
-#    list_of_exceptionals = pickle.load(file)
-#    file.close()
-#
-
-def To_File(list):
-    if outputfile:
-        file = open(outputfile, "w")
-        pickle.dump(list, file)
-        file.close()
-    else: print"no outputfile indicated; use option -o [filename]"
-    return
-
+# for k,v in parameters.items():
+#     eval(k + ' = v')
+startweight = parameters['startweight']
+outputfile = parameters['outputfile']
 
 list_of_exceptionals = []
-initial_strategy = Quasicone.Initial_Strategy()
+initial_strategy = Quasicone.Strategy.initial()
 
-for mu, quasicone in enumerate(Quasicone.Iterator()):
+for mu, quasicone in enumerate(Quasicone.Iterator.iterator()):
+    print 'list_of_exceptionals line 24', mu, '\n', quasicone
     new_instance = \
-        Quasicone.Apply_strategy(startweight, quasicone, initial_strategy)
+        Apply_strategy(quasicone, initial_strategy)
+    print 'new_instance', new_instance
     new_instance.enumerator.append(mu)
     if new_instance.successful: pass # do nothing
     else: list_of_exceptionals.append(new_instance)
 
-
-To_File(list_of_exceptionals)
-
+from Quasicone.utils import to_file
+to_file(list_of_exceptionals, outputfile)
 
 import TeX
 print(TeX.Output(TeX.Quasicones_to_TeX(list_of_exceptionals)))

@@ -1,2 +1,6 @@
+# python binaries
 *.pyo
 *.pyc
+
+# data storage formats
+*.pi

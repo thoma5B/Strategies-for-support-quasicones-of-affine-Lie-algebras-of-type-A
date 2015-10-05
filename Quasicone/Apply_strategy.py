@@ -1,7 +1,15 @@
 
 from collections import deque
-from parameters import parameters
+from numpy import array, add
+from Iterator import *
+from utils import  Root_to_Index
+import json
+
+with open("parameters.json", "rw+") as f:
+    parameters = json.load(f)
 n = parameters['n']
+startweight = parameters['startweight']
+
 
 def Defect(C):
     defect = 0
@@ -16,7 +24,7 @@ def Defect(C):
 
 class Apply_strategy():
 
-    def __init__(self, startweight, quasicone, list_of_operators):
+    def __init__(self, quasicone, list_of_operators, startweight=startweight):
         self._weight = array(startweight).copy()
         self.successful = False
         self.delta = -1 # actually . = self._weight[1].copy()
@@ -62,8 +70,8 @@ class Apply_strategy():
     def Root_step(self, root):      				# weight=[0, -1] =~ \mu - \delta
         weight = self._weight.copy()
         self._weight = add(weight, root)
-        [i, j] = Root_to_Index( root[0] )  #
-        [iii, jjj] = Root_to_Index( self._weight[0] )
+        [i, j] = Root_to_Index( root[0], n )  #
+        [iii, jjj] = Root_to_Index( self._weight[0], n )
         if not [iii, jjj] == [0, 0] :
             self.C_derived[jjj, iii] = -self._weight[1]   # this comes from the hole
         if self.C_derived[j, i] + root[1] < 1 and not [jjj, iii] == [j, i]:
@@ -103,7 +111,7 @@ class Apply_strategy():
                 self.successful = True
             # now adopt strategy according to the previous transforms
             if (not strategy): break
-            [iii, jjj] = Root_to_Index( strategy[0] )
+            [iii, jjj] = Root_to_Index( strategy[0], n )
             im_root = self.C_derived[iii, jjj] - 1
         if self.delta > 0 or self.defect <= 0:
             self.successful = True

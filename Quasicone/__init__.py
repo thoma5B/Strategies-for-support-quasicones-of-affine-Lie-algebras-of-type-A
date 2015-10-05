@@ -1,11 +1,28 @@
 
 # declare global parameter n
 
-from parameters import parameters
 
 def __init__(**kwargs):
-    for k, v in kwargs.items():
-        parameters[k] = v
-    import Iterator, Strategy, Weyl_normal
-    from Apply_strategy import  Apply_strategy#, Defect
+    # update parameters:
+    import json
+    JSON = json.JSONEncoder().encode
+
+    with open("parameters.json", "rw+") as f:
+        try: parameters = json.load(f)
+        except ValueError,err:
+            parameters = {}
+            print "Warning: in file parameters.json: ", err ,'\n', f.read()
+        print parameters
+        # clear file content
+        f.seek(0)
+        f.truncate()
+        # update parameters
+        for k, v in kwargs.items():
+            parameters[k] = v
+        f.write(JSON(parameters))
+        f.close()
+
+    import Strategy, Weyl_normal
+    from Iterator import iterator
+    from Apply_strategy import  Apply_strategy #, Defect
     from Weyl_normal import Weyl_normal_form

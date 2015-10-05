@@ -1,7 +1,10 @@
 import numpy as p
 
 from Iterator import subdiag
-from parameters import parameters
+import json
+
+with open("parameters.json", "rw+") as f:
+    parameters = json.load(f)
 n = parameters['n']
 
 def transposition_labeled_sort(L, key = lambda x: x, reverse=False):

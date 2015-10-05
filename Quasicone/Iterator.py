@@ -1,35 +1,43 @@
 from collections import deque
+from numpy import zeros
 
-from parameters import parameters
+import json
+with open("parameters.json", "rw+") as f:
+    parameters = json.load(f)
 n = parameters['n']
+max = parameters['max']
 
 Iterate_Nondiag = iter([(i,j) for i in range(n) for j in range(n) if i != j])
 subdiag = [(j + offdiag, j) for offdiag in range(1, n) for j in range(n - offdiag)]
-subdiag_indices_iter = lambda i, j : iter(subdiag(n)[subdiag(n).index((i, j)) : ])
+subdiag_indices_iter = lambda i, j : iter(subdiag[subdiag.index((i, j)) : ])
 reversed_subdiag_iter = lambda i, j : reversed(subdiag[:subdiag.index((i, j))])
 
 
-def Iterator(n, max):
-
+def iterator(n = n, max = max):
+    """
+    generates the initial list of quasicone
+    """
     Zeros = zeros((n,n),int) 						# from numpy import *
 
     def start_matrix():
         C = Zeros
         for ii in range (0, n):
             for offdiag in range(1, n - ii):
-                C[ii, ii + offdiag] = offdiag 		# above upper diagonal
-                C[ii + offdiag, ii] = -offdiag 		# +2
+                C[ii, ii + offdiag] = offdiag 		# above diagonal
+                C[ii + offdiag, ii] = -offdiag 		# +2 # subdiagonal
         C[1, 0] = 2
         return C
 
     Startmatrix = start_matrix()
     _C = Startmatrix.copy()
     _Gap = {}           							# create empty dictionary
+    for ii in range (0, n):
+        for offdiag in range(1, n - ii):
+            _Gap[ii + offdiag, ii] = 0              # below diagonal (subdiagonal)
     _Gap[(1, 0)] = 3    							# put one value
 
-
     def Check_inequalities(): 						# checks all inequalities
-        for [i, j] in Iterate_Nondiag(n):
+        for [i, j] in Iterate_Nondiag:
             for jj in range(0, n):   				# correct row
                 if jj == i or jj == j : continue
                 if _C[i, jj] > _C[i, j] + _C[j, jj]:
@@ -50,15 +58,16 @@ def Iterator(n, max):
         gaplist = deque([])							# from collections : double ended queue
 
         while _Gap.get((n - 1, 0), 0) < max:
-            if [i, j] == [1, 0]:   					# i == 1 and j == 0
+            if [i, j] == [1, 0]:
                 while _Gap[(1, 0)] < max:
                     _Gap[(1, 0)] += 1
                     gaplist.append( _Gap )
-            it1, it2 = subdiag_indices_iter(i, j), subdiag_indices_iter(i, j)
-            next(i2)
-            for (i, j) in it1:      				# find root where gap ...
-                if _Gap[next(it2, 0)] < _Gap[(i, j)]:
-                    (i, j) = next(it1)				# ... can still be increased ...
+            it = subdiag_indices_iter(i, j)         # find root where gap ...
+            while True:
+                try: (ii,jj) = next(it)
+                except StopIteration: break
+                if _Gap[(ii, jj)] < _Gap[(i, j)]:
+                    (i, j) = (ii, jj)               # ... can still be increased ...
                     break
             _Gap[(i, j)] += 1    					# ... and increase it
             [i, j] = Reset_Gaps(i, j)
@@ -77,7 +86,6 @@ def Iterator(n, max):
     # #############################################################################
     # main function ###############################################################
     # #############################################################################
-
     for Gap in iter(Gaps_deque()):
         for i in xrange(0, n - 1):   				# start with [i,j]=[1,0]
             _C[i + 1, i] = Gap[i + 1, i] - 1 		# subdiagonal
