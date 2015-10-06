@@ -32,7 +32,8 @@ except TypeError:
 kwargs = {  'n' : r + 1,
             'max' : r + 1,
             "extraexceptionals": "extraexceptionals_r{}.pi".format(r),
-            "exceptionals": "exceptionals_r{}.pi".format(r) }
+            "exceptionals": "exceptionals_r{}.pi".format(r),
+            "startweight": [0, -1] }
 
 Quasicone.__init__(**kwargs)
 print 'running algorithm for n =', kwargs['n'],\

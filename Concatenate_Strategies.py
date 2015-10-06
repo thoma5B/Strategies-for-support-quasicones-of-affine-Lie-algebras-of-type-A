@@ -11,7 +11,6 @@ startweight = parameters['startweight']
 inputfile = parameters['exceptionals']
 n = parameters['n']
 
-import pickle
 if inputfile:
     file = open(inputfile, "r")
     list_of_exceptionals = pickle.load(file)

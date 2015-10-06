@@ -21,9 +21,14 @@ A full description of the theory behind this can be found at my thesis at http:/
 ## modules of the package Quasicone and dependencies
 
 ```
-Quasicone.Iterator()
-Quasicone.Weyl_normal( pylab.array )
-Quasicone.Strategy_iterator( list, itertools)
-parameters.json # n = 3
-Quasicone.Apply_strategy
+Quasicone( json )
+Quasicone.Iterator( collections )
+Quasicone.Weyl_normal( numpy.array )
+Quasicone.Strategy( itertools )
+Quasicone.Apply_strategy( numpy, collections, json )
+Concatenate_Strategies( numpy, collections, json, pickle, Quasicone )
+list_of_exceptionals( copy, numpy, math, pickle )
+Tree_to_TikZ_Graph( latex-packages: tikz, tkz-berge, fp )
+
+parameters.json 
 ```

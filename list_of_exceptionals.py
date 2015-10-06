@@ -7,7 +7,7 @@ and as TeX in the file 'quasicones_rank[n].tex'
 """
 
 import math as m
-import pylab as p
+import numpy as p # formely pylab
 import copy as c
 import Quasicone
 from Quasicone.Apply_strategy import Apply_strategy
