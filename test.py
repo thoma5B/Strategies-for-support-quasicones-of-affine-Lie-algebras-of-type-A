@@ -16,7 +16,7 @@ parser = OptionParser()
 parser.add_option("-r", "--rank", dest="rank")
 parser.add_option("-i", "--input", dest="input")
 parser.add_option("-o", "--output", dest="output")
-parser.add_option("-m", "--max", dest="max")
+parser.add_option("-m", "--max", dest="max_gap")
 (options, args) = parser.parse_args()
 try:
     r = int(options.rank)
@@ -25,12 +25,12 @@ except TypeError, err:
     "-r", "--rank", dest="rank"'
     )
 try:
-    max = int(options.max)
+    max = int(options.max_gap)
 except TypeError:
-    print 'no max indicated, I take the default one from "parameters.json"'
+    print 'no max indicated, I take the default one (r+1)'
 
 kwargs = {  'n' : r + 1,
-            'max' : max,
+            'max' : r + 1,
             "extraexceptionals": "extraexceptionals_r{}.pi".format(r),
             "exceptionals": "exceptionals_r{}.pi".format(r) }
 

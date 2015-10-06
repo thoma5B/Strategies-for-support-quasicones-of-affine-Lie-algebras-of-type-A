@@ -46,8 +46,8 @@ def Weyl_normal_form(C):
         	[j, i] = auxiliary_array.pop(0)[0]
         # C_normal[i, j] = C[ii, jj]  #
         # C_normal[j, i] = C[jj, ii]
-        C[i,:], C[ii,:] = C[ii,:], C[i,:] # swap rows
-        C[:,j], C[:,jj] = C[:,jj], C[:,j] # then swap columns
+        C[i,:], C[ii,:] = C[ii,:], C[i,:]           # swap rows
+        C[:,j], C[:,jj] = C[:,jj], C[:,j]           # then swap columns
     shift_vec = []                              	# shifting:
     for [i, j] in iter(subdiag):
         if i - j == 1:
