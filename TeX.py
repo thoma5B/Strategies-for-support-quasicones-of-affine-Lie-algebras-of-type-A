@@ -1,6 +1,6 @@
 
 def Output(data_string = ""):
-    output_string = "\documentclass[10pt,a4paper]{elsarticle} \n" \
+    output_string = "\documentclass[10pt,a4paper]{article} \n" \
     + "\\usepackage{amsmath} \n" \
     + "\\usepackage{amssymb} \n" \
     + "\\usepackage[hmargin=1.5cm, vmargin=1.5cm]{geometry} \n" \

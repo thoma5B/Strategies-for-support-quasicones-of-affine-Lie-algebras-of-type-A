@@ -1,4 +1,10 @@
-
+ #!usr/bin/env python
+"""
+execute by typing, e.g.
+>python test.py -r 3 -m 4
+#running algorithm for n = 4 and max = 4
+#time:  38.5
+"""
 
 import Quasicone
 from optparse import OptionParser
@@ -10,6 +16,7 @@ parser = OptionParser()
 parser.add_option("-r", "--rank", dest="rank")
 parser.add_option("-i", "--input", dest="input")
 parser.add_option("-o", "--output", dest="output")
+parser.add_option("-m", "--max", dest="max")
 (options, args) = parser.parse_args()
 try:
     r = int(options.rank)
@@ -17,9 +24,13 @@ except TypeError, err:
     raise parser.error('options are \n \
     "-r", "--rank", dest="rank"'
     )
+try:
+    max = int(options.max)
+except TypeError:
+    print 'no max indicated, I take the default one from "parameters.json"'
 
 kwargs = {  'n' : r + 1,
-            'max' : 3,
+            'max' : max,
             "extraexceptionals": "extraexceptionals_r{}.pi".format(r),
             "exceptionals": "exceptionals_r{}.pi".format(r) }
 
@@ -29,8 +40,9 @@ print 'running algorithm for n =', kwargs['n'],\
 
 @timer
 def run():
-    #import list_of_exceptionals # executes script 'list_of_exceptionals.py'
-    import list_of_extraexceptionals # executes script 'list_of_extraexceptionals.py'
+    import list_of_exceptionals        # executes script 'list_of_exceptionals.py'
+    #import list_of_extraexceptionals    # executes script 'list_of_extraexceptionals.py'
+    import Concatenate_Strategies       # executes script 'Concatenate_Strategies.py'
     return
 
 run()

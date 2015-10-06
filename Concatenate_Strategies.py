@@ -2,13 +2,13 @@ from collections import defaultdict
 import numpy as p
 import Quasicone
 from Quasicone.Apply_strategy import Apply_strategy
+from Quasicone.Weyl_normal import Weyl_normal_form
 import json, pickle
 
 with open("parameters.json", "rw+") as f:
     parameters = json.load(f)
 startweight = parameters['startweight']
 inputfile = parameters['exceptionals']
-outputfile = 'unsolved_after_TreeMap.pi'
 n = parameters['n']
 
 import pickle
@@ -17,33 +17,6 @@ if inputfile:
     list_of_exceptionals = pickle.load(file)
     file.close()
 else: print "no inputfile indicated; use option -i [filename]"
-
-
-# File Operations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-import pickle
-try:
-    with open(inputfile, "r") as file:
-        list_of_exceptionals = pickle.load(file)
-except IOError, err:
-    print err, "-- probably no inputfile indicated; use option -i [filename]"
-
-
-def To_File(list):
-    try:
-        with open(outputfile, "w") as file:
-            pickle.dump(list, file)
-    except IOError, err:
-        print err
-        yes = input("want to create the file 'output_list' to dump data y/n: ")
-        if yes == 'y':
-            with open("output_list", "w") as file:
-                pickle.dump(list, file)
-            return
-        else:
-            import sys
-            sys.exit()
-# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 
 as_tuple = lambda C : tuple(tuple(C[i]) for i in range(n)) # for an nxn-array
@@ -77,7 +50,7 @@ class MapTree():
             # copy in two lists, in order to easily compare with start configuration
             mu += 1
         MapTree.list_of_C_init = list(MapTree.list_of_C_derived)
-        MapTree.max_no_strategies = len([i for i in Quasicone.Strategy.Iterator(n)])
+        MapTree.max_no_strategies = len([i for i in Quasicone.Strategy.iterator(n)])
 
 
     def get_Tree_key(self, tree_index):
@@ -162,9 +135,11 @@ class MapTree():
         nothing_new = True
         for C, index_list in self.d_derived.items():
         # makes a copy of self.d_derived - modifications manifest only after termination
-            for nu, strg in enumerate(Quasicone.Strategy.Iterator(n)):
-                new_instance = Quasicone.Apply_strategy(startweight, p.array(C), strg)
-                C_der_nor = as_tuple(Quasicone.Weyl_normal_form(new_instance.C_derived))
+            for nu, strg in enumerate(Quasicone.Strategy.iterator(n)):
+                new_instance = Apply_strategy(  startweight = startweight,
+                                                quasicone = p.array(C),
+                                                list_of_operators = strg)
+                C_der_nor = as_tuple(Weyl_normal_form(new_instance.C_derived))
                 # 3. ###############################################################
                 if new_instance.successful or (C_der_nor in MapTree.list_of_successful):
                     #print C_der_nor, " defect: ", new_instance.defect
@@ -254,9 +229,12 @@ for C_init in MapTree.list_of_C_init:
 
 list_of_unsolved_array = [p.array(C_init) for C_init in list_of_unsolved]
 #as file with Python-list
-To_File(list_of_unsolved_array)
+
+from utils import to_file
+outputfile = 'unsolved_after_TreeMap.pi'
+to_file(list_of_unsolved_array, outputfile)
 
 #as TeX-formatted output
 import TeX
 filename = 'unsolved_after_TreeMap.tex'
-TeX.to_file(TeX.Quasicones_to_TeX(list_of_unsolved_array)), filename)
+TeX.to_file(TeX.Quasicones_to_TeX(list_of_unsolved_array), filename)

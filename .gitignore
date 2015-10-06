@@ -5,3 +5,8 @@
 # data storage formats
 *.pi
 *.tex
+
+# pdflatex files
+*.pdf
+*.log
+*.aux

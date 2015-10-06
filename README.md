@@ -1,18 +1,8 @@
 # Strategies for support quasicones of affine Lie algebras of type A
 
-## modules of the package Quasicone and dependencies
+## how it works
 
-'''
-Quasicone.Iterator()
-
-Quasicone.Weyl_normal( pylab.array )
-
-Quasicone.Strategy_iterator( list, itertools)
-
-Quasicone.parameters # n = 3
-
-Quasicone.Apply_strategy
-'''
+A full description of the theory behind this can be found at my thesis at http://arxiv.org/...
 
 **Steps**
 
@@ -26,3 +16,14 @@ Quasicone.Apply_strategy
 - The pickled list of yet unsolved quasicones is printed in shape of a human readable TeX-file. Declare the output file or use the pattern from the run.sh script
 - also the stepwise solution is represented, when opting-in the TeX-output in the files list_of_*.py
 - For the MapTree-algorithm an illustration of the search tree can be produced, by means of the 'Tree_to_TikZ_Graph.py' script
+
+
+## modules of the package Quasicone and dependencies
+
+```
+Quasicone.Iterator()
+Quasicone.Weyl_normal( pylab.array )
+Quasicone.Strategy_iterator( list, itertools)
+parameters.json # n = 3
+Quasicone.Apply_strategy
+```

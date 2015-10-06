@@ -1,5 +1,21 @@
 
+# File Operations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 import pickle
+
+# def To_File(list):  # deprecated
+#     try:
+#         with open(outputfile, "w") as file:
+#             pickle.dump(list, file)
+#     except IOError, err:
+#         print err
+#         yes = input("want to create the file 'output_list' to dump data y/n: ")
+#         if yes == 'y':
+#             with open("output_list", "w") as file:
+#                 pickle.dump(list, file)
+#             return
+#         else:
+#             import sys
+#             sys.exit()
 
 def to_file(data, outputfile):
     if outputfile:
@@ -16,6 +32,7 @@ def to_file(data, outputfile):
 #       file.close()
 #    else: print"no inputfile indicated; use option -i [filename]"
 #    return
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 import timeit
 
