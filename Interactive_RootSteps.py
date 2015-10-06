@@ -1,3 +1,13 @@
+"""
+currently not properly maintained !
+
+performs root steps (transformations on the support of the module) in interaction
+with the user. Root operators must be provided in shape of positive integers
+that represent dual exponential of the simple part of the real root (modulo delta).
+
+The modulus is then computed by the programm.
+"""
+
 from collections import defaultdict
 import numpy as p
 import Quasicone as Q
@@ -32,12 +42,10 @@ class map_tree():
         for C in list_of_exceptionals:
             C_init = as_tuple(C)
 
-
     def __str__(self):
         for C, index_list in self.d_derived.items():
             print p.array(C), " --> ", index_list, "\n"
         return ""
-
 
     def run(self):
         self.strategy_step()

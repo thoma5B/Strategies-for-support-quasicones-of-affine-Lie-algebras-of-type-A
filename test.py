@@ -27,7 +27,7 @@ except TypeError, err:
 try:
     max = int(options.max_gap)
 except TypeError:
-    print 'no max indicated, I take the default one (r+1)'
+    print 'no max indicated, I\'ll take the default one (r+1)'
 
 kwargs = {  'n' : r + 1,
             'max' : r + 1,
