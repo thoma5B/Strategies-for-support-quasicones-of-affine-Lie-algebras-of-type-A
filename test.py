@@ -9,6 +9,9 @@ execute by typing, e.g.
 import Quasicone
 from optparse import OptionParser
 import sys
+import logging
+logging.basicConfig(level=logging.DEBUG)
+#_logger = logging.getLogger(__name__)
 
 from utils import timer
 
@@ -43,7 +46,7 @@ print 'running algorithm for n =', kwargs['n'],\
 def run():
     import list_of_exceptionals        # executes script 'list_of_exceptionals.py'
     #import list_of_extraexceptionals    # executes script 'list_of_extraexceptionals.py'
-    import Concatenate_Strategies       # executes script 'Concatenate_Strategies.py'
+    #import Concatenate_Strategies       # executes script 'Concatenate_Strategies.py'
     return
 
 run()

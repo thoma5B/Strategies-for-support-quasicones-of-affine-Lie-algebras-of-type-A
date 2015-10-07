@@ -9,6 +9,11 @@ and as TeX in the file 'quasicones_rank[n].tex'
 import math as m
 import numpy as p # formely pylab
 import copy as c
+
+import logging
+_logger = logging.getLogger(__name__)
+#_logger.propagate = False
+
 import Quasicone
 from Quasicone.Apply_strategy import Apply_strategy
 import json
@@ -28,6 +33,9 @@ for mu, quasicone in enumerate(Quasicone.Iterator.iterator()):
         Apply_strategy(quasicone, initial_strategy)
     #print 'new_instance', new_instance
     new_instance.enumerator.append(mu)
+    _logger.debug('new_instance.successful: {} -> \n {}'.format(
+        new_instance.successful, new_instance._C
+    ))
     if new_instance.successful: pass # do nothing
     else: list_of_exceptionals.append(new_instance)
 
