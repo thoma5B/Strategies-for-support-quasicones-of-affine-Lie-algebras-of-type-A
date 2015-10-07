@@ -4,7 +4,7 @@ echo enter rank, "n = r + 1; A_r"
 read rank
 
 #################################
-# list_of_exceptionals of rank r:
+# exceptionals of rank r:
 #################################
 #
 # python -O test.py -r $rank

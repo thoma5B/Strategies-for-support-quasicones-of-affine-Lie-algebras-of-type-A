@@ -1,19 +1,18 @@
  #!usr/bin/env python
 """
-execute by typing, e.g.
->python test.py -r 3 -m 4
-#running algorithm for n = 4 and max = 4
-#time:  38.5
+The first Exceptionals.generate_list is implemented with '**kwargs'.
 """
 
-import Quasicone
 from optparse import OptionParser
 import sys
 import logging
 logging.basicConfig(level=logging.DEBUG)
+# for details on logging-levels see:
+# https://docs.python.org/2/library/logging.html#logging-levels
 #_logger = logging.getLogger(__name__)
-
 from utils import timer
+
+import Quasicone, Exceptionals, Concatenate_Strategies
 
 parser = OptionParser()
 parser.add_option("-r", "--rank", dest="rank")
@@ -43,10 +42,11 @@ print 'running algorithm for n =', kwargs['n'],\
         'and max =', kwargs['max']
 
 @timer
-def run():
-    import list_of_exceptionals        # executes script 'list_of_exceptionals.py'
+def main():
+    Exceptionals.generate_list(**kwargs)
     #import list_of_extraexceptionals    # executes script 'list_of_extraexceptionals.py'
-    #import Concatenate_Strategies       # executes script 'Concatenate_Strategies.py'
+    Concatenate_Strategies.generate_list(**kwargs)       # executes script 'Concatenate_Strategies.py'
     return
 
-run()
+if __name__ == '__main__':
+    main()

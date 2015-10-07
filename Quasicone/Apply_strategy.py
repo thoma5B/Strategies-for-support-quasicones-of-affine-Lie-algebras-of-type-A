@@ -8,7 +8,6 @@ import json
 with open("parameters.json", "rw+") as f:
     parameters = json.load(f)
 n = parameters['n']
-startweight = parameters['startweight']
 
 
 def Defect(C):
@@ -24,7 +23,7 @@ def Defect(C):
 
 class Apply_strategy():
 
-    def __init__(self, quasicone, list_of_operators, startweight=startweight):
+    def __init__(self, quasicone, list_of_operators, startweight):
         self._weight = array(startweight).copy()
         self.successful = False
         self.delta = -1 # actually . = self._weight[1].copy()
