@@ -1,6 +1,6 @@
 # Strategies for support quasicones of affine Lie algebras of type A
 
-## how it works
+## How it works
 
 A full description of the theory behind this can be found at my thesis at http://arxiv.org/...
 

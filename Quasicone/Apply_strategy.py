@@ -5,6 +5,7 @@ from Iterator import *
 from utils import  Root_to_Index
 import json
 
+#retrieve global parameter 'n'
 with open("parameters.json", "rw+") as f:
     parameters = json.load(f)
 n = parameters['n']
