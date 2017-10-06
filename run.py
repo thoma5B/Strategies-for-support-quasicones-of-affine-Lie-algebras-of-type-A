@@ -44,6 +44,7 @@ print 'running algorithm for n =', kwargs['n'],\
 @timer
 def main():
     Exceptionals.generate_list(**kwargs)
+    print('number of exceptionals:', Exceptionals.number_of_exceptionals)
     #import list_of_extraexceptionals    # executes script 'list_of_extraexceptionals.py'
     Concatenate_Strategies.generate_list(**kwargs)       # executes script 'Concatenate_Strategies.py'
     return
