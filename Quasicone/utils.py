@@ -1,7 +1,4 @@
-import math as m
 from numpy import *
-#import copy as c
-from collections import deque, defaultdict
 
 def rootsum(i, j):
     return sum((2**k) for k in range(i, j))

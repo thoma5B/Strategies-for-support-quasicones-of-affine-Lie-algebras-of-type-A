@@ -1,3 +1,4 @@
+
 from collections import deque
 from numpy import array, add
 from Iterator import *

@@ -1,5 +1,4 @@
 import pickle
-import sys
 from optparse import OptionParser
 
 parser = OptionParser()
@@ -16,4 +15,5 @@ if inputfile:
     file.close()
 
 import TeX
+
 TeX.to_file(TeX.Quasicones_to_TeX(in_list_of_Quasicones), outputfile)
